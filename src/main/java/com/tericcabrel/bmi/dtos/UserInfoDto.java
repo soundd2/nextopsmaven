@@ -1,23 +1,38 @@
 package com.tericcabrel.bmi.dtos;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-@Accessors(chain = true)
-@Data
 public class UserInfoDto {
-    @Min(value = 2, message = "The code must be equal or greater than 3")
-    @Max(value = 800, message = "The code must be equal or lower than 800")
-    double weight;
+    @Min(0)
+    @Max(300)
+    private double height;
 
-    @Min(value = 40, message = "The code must be equal or greater than 40")
-    @Max(value = 300, message = "The code must be equal or lower than 300")
-    double height;
+    @Min(0)
+    @Max(500)
+    private double weight;
+
+    // Getters and Setters
+
+    public double getHeight() {
+        return height;
+    }
+
+    public UserInfoDto setHeight(double height) {
+        this.height = height;
+        return this;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public UserInfoDto setWeight(double weight) {
+        this.weight = weight;
+        return this;
+    }
 
     public double getComputedHeight() {
-        return this.height / 100;
-    };
+        return height / 100; // Convert cm to meters
+    }
 }
